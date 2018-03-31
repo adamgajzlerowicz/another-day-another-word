@@ -85,8 +85,6 @@
       "warn",
       "multiline-multiprop"
     ],
-    "react/jsx-closing-bracket-location": "warn",
-    "react/jsx-closing-tag-location": "warn",
     "react/jsx-indent": [
       "error",
       4
