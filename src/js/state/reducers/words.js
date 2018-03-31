@@ -9,6 +9,7 @@ const reducer = (state = defaultState, action) => {
     switch (action.type) {
         case ADD_WORD:
             return Object.assign({}, state, { [action.payload]: [] });
+        // eslint-disable-next-line no-case-declarations
         case DELETE_WORD:
             const clone = Object.assign({}, state);
             return delete clone[action.payload];
@@ -22,9 +23,12 @@ const reducer = (state = defaultState, action) => {
 
 };
 
-const addWord = message => ({ type: ADD_WORD, payload: message });
-const clearWords = (_) => ({ type: CLEAR_WORDS });
+const addWord = word => ({ type: ADD_WORD, payload: word });
+const deleteWord = word => ({ type: DELETE_WORD, payload: word });
+const updateWord = (word, synonyms) => ({ type: DELETE_WORD, payload: { word, synonyms } });
+
+const clearWords = () => ({ type: CLEAR_WORDS });
 
 export {
-    reducer, addWord
+    reducer, addWord, updateWord, clearWords, deleteWord,
 };
