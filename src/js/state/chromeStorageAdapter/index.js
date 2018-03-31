@@ -27,7 +27,6 @@ function transformState(down, up) {
                 const transformedState = finalUp
                     ? finalUp.reduce((s, t) => t(s), state)
                     : state;
-
                 callback(null, transformedState);
             });
         },

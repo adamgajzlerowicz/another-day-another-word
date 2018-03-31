@@ -11,7 +11,7 @@ export default (storage) => ({
 
     get(key, callback) {
         storage.sync.get([key], (value) => {
-            callback(value[key]);
+            callback(undefined, value[key]);
         });
     },
 

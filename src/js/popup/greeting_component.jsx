@@ -1,14 +1,10 @@
 import React from 'react';
-import icon from '../../img/icon-128.png';
+import { connect } from 'react-redux';
 
-export default class extends React.Component {
-    render () {
-        return (
-            <div>
-                dupa
-                <img src={icon} />
-            </div>
-        );
-    }
-}
+const Hello = () => {
+    return <div>dupa</div>;
+};
 
+const ConnectedHello = connect(state => ({ state }))(Hello);
+
+export default ConnectedHello;

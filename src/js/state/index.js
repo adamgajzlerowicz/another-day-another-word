@@ -11,7 +11,7 @@ const rootReducer = compose(mergePersistedState())(combineReducers({ words }));
 const storage = adapter(chrome.storage);
 const enchancer = compose(persistState(storage, 'redux'));
 
-const store = createStore(rootReducer, {}, enchancer);
+const store = createStore(rootReducer, enchancer);
 
 export {
     store
