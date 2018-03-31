@@ -11,7 +11,7 @@ import { InputLabel } from 'material-ui/Input';
 
 const noop = () => null;
 
-const Hello = () => {
+const App = () => {
     return <div>
         <Switch checked={true} onChange={noop} aria-label="Active"/>
 
@@ -48,6 +48,6 @@ const Hello = () => {
     </div>;
 };
 
-const ConnectedHello = connect(state => ({ state }))(Hello);
+const ConnectedApp = connect(state => ({ state }))(App);
 
-export default ConnectedHello;
+export default ConnectedApp;
