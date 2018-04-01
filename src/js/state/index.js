@@ -13,7 +13,9 @@ const storage = adapter(chrome.storage);
 const enchancer = compose(persistState(storage, 'redux'));
 
 const store = createStore(rootReducer, enchancer);
-
+// store.subscribe(()=>{
+//     chrome.extension.getBackgroundPage().console.log(store.getState().words);
+// })
 export {
     store
 };

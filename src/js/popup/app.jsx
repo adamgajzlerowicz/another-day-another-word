@@ -8,9 +8,17 @@ import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import { InputLabel } from 'material-ui/Input';
 import { deleteWord, clearWords, updateWord, addWord } from '../state/reducers/words';
-import { setInput, setSelect } from '../state/reducers/form';
+import { setInput, setSelect, clearForm } from '../state/reducers/form';
 
 const noop = () => null;
+
+const Row = ({ ...props }) => {
+    chrome.extension.getBackgroundPage().console.log(props);
+    return <div>
+        dupa
+        <Switch checked={true} onChange={noop} aria-label="Active"/>
+    </div>;
+};
 
 const App = ({
                  updateWord,
@@ -25,13 +33,15 @@ const App = ({
                  setInput,
                  submit,
              }) => {
-    return <div>
-        <Switch checked={true} onChange={noop} aria-label="Active"/>
 
-        <br/>
+    chrome.extension.getBackgroundPage().console.log(Object.keys(words));
+    return <div>
+        {Object.keys(words).map((word, index) =>
+            <Row key={Math.random} word={index} details={words[word]}/>
+        )}
         <form onSubmit={(e) => {
             e.preventDefault();
-            submit({
+            input && submit({
                 word: input,
                 synonyms: [],
                 active: true,
@@ -46,7 +56,7 @@ const App = ({
                 onChange={setInput}
                 margin="normal"
             />
-            <FormControl className={'form-control'}>
+            <FormControl className={'form-control select'}>
                 <InputLabel>Type</InputLabel>
                 <Select
                     value={select}
@@ -66,21 +76,20 @@ const App = ({
                 </Select>
             </FormControl>
             <br/>
-            <Button variant={'raised'} color={'primary'} size="small" className={'add_button'}>Add</Button>
+            <Button
+                variant={'raised'}
+                color={'primary'}
+                size="small"
+                type={'submit'}
+                className={'add_button'}
+            >
+                Add
+            </Button>
         </form>
-        ;
-    </div>
-        ;
+    </div>;
 };
 
 const mapState = state => ({ state });
-
-// word = {
-//     word: string,
-//     active: boolean,
-//     synonymes: string[],
-//     type: string
-// };
 
 const mapDispatch = dispatch => ({
     updateWord: word => dispatch(updateWord(word)),
@@ -89,8 +98,7 @@ const mapDispatch = dispatch => ({
     setInput: data => dispatch(setInput(data.target.value)),
     setSelect: data => dispatch(setSelect(data.target.value)),
     submit: data => {
-        dispatch(setInput(''));
-        dispatch(setInput('any'));
+        dispatch(clearForm());
         dispatch(addWord(data));
     }
 });

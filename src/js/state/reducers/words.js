@@ -6,12 +6,12 @@ const UPDATE_WORD = 'UPDATE_WORD';
 const defaultState = {};
 
 const reducer = (state = defaultState, action) => {
+    const clone = Object.assign({}, state);
+
     switch (action.type) {
         case ADD_WORD:
-            return Object.assign({}, state, { [action.payload]: [] });
-        // eslint-disable-next-line no-case-declarations
+            return Object.assign({}, { ...state, [action.payload.word]: action.payload });
         case DELETE_WORD:
-            const clone = Object.assign({}, state);
             return delete clone[action.payload];
         case UPDATE_WORD:
             return Object.assign({}, state, { [action.payload.word]: action.payload.synonyms });
