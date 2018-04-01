@@ -63,6 +63,9 @@ var options = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV)
     }),
+      new CopyWebpackPlugin([{
+          from: 'src/js/background.js'
+      }]),
     new CopyWebpackPlugin([{
       from: "src/manifest.json",
       transform: function (content, path) {
