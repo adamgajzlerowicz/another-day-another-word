@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension Webpack",
+  "name": "Another day, another word",
   "options_page": "options.html",
   "permissions": [
     "storage",
@@ -21,7 +21,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "background.bundle.js"
+        "foo.js"
       ]
     }
   ]

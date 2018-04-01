@@ -9,7 +9,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import { InputLabel } from 'material-ui/Input';
-import { deleteWord, clearWords, updateWord, addWord } from '../state/reducers/words';
+import { deleteWord, updateWord, addWord } from '../state/reducers/words';
 import { setInput, setSelect, clearForm } from '../state/reducers/form';
 
 const Row = ({ word: { word, type, synonyms, active }, toggleEnabled, deleteWord }) => {
@@ -30,17 +30,16 @@ const Row = ({ word: { word, type, synonyms, active }, toggleEnabled, deleteWord
 };
 
 const App = ({
-                 updateWord,
-                 deleteWord,
-                 clearWords,
-                 state: {
-                     form: { input, select },
-                     words,
-                 },
-                 setSelect,
-                 setInput,
-                 submit,
-             }) => {
+    updateWord,
+    deleteWord,
+    state: {
+        form: { input, select },
+        words,
+    },
+    setSelect,
+    setInput,
+    submit,
+}) => {
 
     return <div>
         {Object.keys(words).map((word) =>
@@ -104,7 +103,6 @@ const mapState = state => ({ state });
 const mapDispatch = dispatch => ({
     updateWord: word => dispatch(updateWord(word)),
     deleteWord: word => dispatch(deleteWord(word)),
-    clearWords: () => dispatch(clearWords()),
     setInput: data => dispatch(setInput(data.target.value)),
     setSelect: data => dispatch(setSelect(data.target.value)),
     submit: data => {
