@@ -2,7 +2,8 @@
   "name": "Chrome Extension Webpack",
   "options_page": "options.html",
   "permissions": [
-    "storage"
+    "storage",
+    "http://*/"
   ],
   "background": {
     "page": "background.html"

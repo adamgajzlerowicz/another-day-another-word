@@ -1,4 +1,4 @@
-const SET_INPUT = 'SET_INPUT ';
+const SET_INPUT = 'SET_INPUT';
 const SET_SELECT = 'SET_SELECT ';
 const CLEAR_FORM = 'CLEAR_FORM';
 

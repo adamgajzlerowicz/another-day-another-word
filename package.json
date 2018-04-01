@@ -9,6 +9,8 @@
     "lintfixer": "yarn lint --fix"
   },
   "dependencies": {
+    "@cycle/http": "^14.9.0",
+    "@cycle/run": "^4.1.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "material-ui": "^1.0.0-beta.39",

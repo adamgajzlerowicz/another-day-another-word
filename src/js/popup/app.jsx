@@ -14,7 +14,7 @@ import { setInput, setSelect, clearForm } from '../state/reducers/form';
 
 const Row = ({ word: { word, type, synonyms, active }, toggleEnabled, deleteWord }) => {
     return <div style={{ float: 'left', width: '100%' }}>
-        {word}{type !== 'any' && ': ' + type}
+        {word}{type !== 'any' && '(' + type + ')'}
         <div style={{ float: 'right' }}>
             Active:
             <Switch checked={active} onChange={toggleEnabled} aria-label="Active"/>
@@ -22,7 +22,10 @@ const Row = ({ word: { word, type, synonyms, active }, toggleEnabled, deleteWord
                 <DeleteIcon/>
             </IconButton>
         </div>
-        <br/>{synonyms.join(', ')}
+        <br/>
+        <br/>
+        {synonyms.join(', ')}
+        <hr/>
     </div>;
 };
 
