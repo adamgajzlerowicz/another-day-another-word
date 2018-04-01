@@ -74,7 +74,7 @@
       "always"
     ],
     "no-process-exit": "error",
-    "react/prop-types": "error",
+    "react/prop-types": 0,
     "react/no-did-mount-set-state": "error",
     "react/no-did-update-set-state": "error",
     "react/prefer-es6-class": [
