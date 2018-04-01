@@ -12,9 +12,13 @@ const reducer = (state = defaultState, action) => {
         case ADD_WORD:
             return Object.assign({}, { ...state, [action.payload.word]: action.payload });
         case DELETE_WORD:
-            return delete clone[action.payload];
+            delete clone[action.payload];
+            return clone;
         case UPDATE_WORD:
-            return Object.assign({}, state, { [action.payload.word]: action.payload.synonyms });
+            return {
+                ...state,
+                [action.payload.word]: action.payload
+            };
         case CLEAR_WORDS:
             return defaultState;
         default:
@@ -25,7 +29,7 @@ const reducer = (state = defaultState, action) => {
 
 const addWord = word => ({ type: ADD_WORD, payload: word });
 const deleteWord = word => ({ type: DELETE_WORD, payload: word });
-const updateWord = (word, synonyms) => ({ type: DELETE_WORD, payload: { word, synonyms } });
+const updateWord = word => ({ type: UPDATE_WORD, payload: word });
 
 const clearWords = () => ({ type: CLEAR_WORDS });
 

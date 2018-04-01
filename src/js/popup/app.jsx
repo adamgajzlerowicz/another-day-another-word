@@ -4,25 +4,30 @@ import Button from 'material-ui/Button';
 import Switch from 'material-ui/Switch';
 import TextField from 'material-ui/TextField';
 import Select from 'material-ui/Select';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import { InputLabel } from 'material-ui/Input';
 import { deleteWord, clearWords, updateWord, addWord } from '../state/reducers/words';
 import { setInput, setSelect, clearForm } from '../state/reducers/form';
 
-const noop = () => null;
-
-const Row = ({ ...props }) => {
-    chrome.extension.getBackgroundPage().console.log(props);
-    return <div>
-        dupa
-        <Switch checked={true} onChange={noop} aria-label="Active"/>
+const Row = ({ word: { word, type, synonyms, active }, toggleEnabled, deleteWord }) => {
+    return <div style={{ float: 'left', width: '100%' }}>
+        {word}{type !== 'any' && ': ' + type}
+        <div style={{ float: 'right' }}>
+            Active:
+            <Switch checked={active} onChange={toggleEnabled} aria-label="Active"/>
+            <IconButton aria-label="Delete" onClick={deleteWord}>
+                <DeleteIcon/>
+            </IconButton>
+        </div>
+        <br/>{synonyms.join(', ')}
     </div>;
 };
 
 const App = ({
                  updateWord,
-                 editWord,
                  deleteWord,
                  clearWords,
                  state: {
@@ -34,10 +39,14 @@ const App = ({
                  submit,
              }) => {
 
-    chrome.extension.getBackgroundPage().console.log(Object.keys(words));
     return <div>
-        {Object.keys(words).map((word, index) =>
-            <Row key={Math.random} word={index} details={words[word]}/>
+        {Object.keys(words).map((word) =>
+            <Row
+                key={Math.random()}
+                word={words[word]}
+                toggleEnabled={() => updateWord({ ...words[word], active: !words[word].active })}
+                deleteWord={() => deleteWord(words[word].word)}
+            />
         )}
         <form onSubmit={(e) => {
             e.preventDefault();
@@ -65,10 +74,8 @@ const App = ({
                         name: 'type',
                         id: 'type-select',
                     }}
+                    displayEmpty={true}
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
                     <MenuItem value={'any'}>Any</MenuItem>
                     <MenuItem value={'adjective'}>Adjective</MenuItem>
                     <MenuItem value={'noun'}>Noun</MenuItem>
